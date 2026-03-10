@@ -62,7 +62,7 @@ function App() {
                 <Navbar connected={connected}/>
                 
                 <div className="flex flex-1">
-                    {/* Painel esquerdo */}
+                    {/* Left panel */}
                     {connected && (
                         <div className="w-96 bg-black/40 p-4 flex flex-col gap-3 animate-slide-in">
                             <h2 className="text-sm font-bold uppercase tracking-widest text-blue-400 mb-2">
@@ -78,7 +78,7 @@ function App() {
                         </div>
                     )}
 
-                    {/* Painel direito */}
+                    {/* Center panel */}
                     <div className="flex-1 flex flex-col items-center justify-center gap-6">
                         <img src={logo} className="w-32 h-32" />
                         <h1 className="text-6xl font-bold">SteamIdle Farm</h1>
