@@ -11,6 +11,7 @@ const client = new SteamUser();
 let activeSocket = null;
 let steamGuardCallback = null;
 let activeGames = []
+let isLoggingIn = false
 
 wss.on('connection', (socket) => {
     console.log('🚀 | Client connected');
@@ -21,9 +22,11 @@ wss.on('connection', (socket) => {
             if(client.steamID) {
                 activeSocket.send(JSON.stringify({ type: 'loggedOn', data: '✅ | Already logged in!' }))
             } else if (fs.existsSync('token.txt')) {
+                isLoggingIn = true
                 const token = fs.readFileSync('token.txt', 'utf8')
                 client.logOn({ refreshToken: token })
             } else {
+                isLoggingIn = true
                 client.logOn({
                     accountName: process.env.STEAM_USERNAME,
                     password: process.env.STEAM_PASSWORD
@@ -61,10 +64,10 @@ wss.on('connection', (socket) => {
 })
 
 client.on('loggedOn', () => {
+    isLoggingIn = false
     console.log('🚀 | User connected')
     client.setPersona(SteamUser.EPersonaState.Online)
     activeSocket.send(JSON.stringify({ type: 'loggedOn', data: '✅ | Login successfully!' }))
-
     if (activeGames.length > 0) {
         client.gamesPlayed(activeGames.map((game) => game.id))
     }
