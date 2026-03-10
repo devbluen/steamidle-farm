@@ -1,0 +1,5 @@
+backend/node_modules
+backend/.env
+backend/token.txt
+frontend/node_modules
+frontend/dist
