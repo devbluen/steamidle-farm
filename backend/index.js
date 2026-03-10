@@ -62,6 +62,7 @@ wss.on('connection', (socket) => {
 
 client.on('loggedOn', () => {
     console.log('🚀 | User connected')
+    client.setPersona(SteamUser.EPersonaState.Online)
     activeSocket.send(JSON.stringify({ type: 'loggedOn', data: '✅ | Login successfully!' }))
 
     if (activeGames.length > 0) {
