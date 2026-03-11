@@ -1,0 +1,1 @@
+wt -w 0 new-tab cmd /k "cd /d %~dp0backend && npm install" ; new-tab cmd /k "cd /d %~dp0frontend && npm install"
